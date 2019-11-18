@@ -2,7 +2,7 @@
  * @Author: Aaron
  * @Date: 2019-11-05 12:09:12
  * @LastEditors: Aaron
- * @LastEditTime: 2019-11-07 18:31:06
+ * @LastEditTime: 2019-11-08 19:18:00
  * @Description: file content
  */
 const Koa = require('koa')
@@ -12,7 +12,6 @@ const json = require('koa-json')
 const onerror = require('koa-onerror')
 const bodyparser = require('koa-bodyparser')
 const logger = require('koa-logger')
-const helmet = require("koa-helmet");
 const plugin = require('./plugin/')
 const middleware = require('./middleware/')
 
@@ -23,8 +22,7 @@ plugin.ready(app)
 
 // error handler
 onerror(app)
-// helmet
-app.use(helmet());
+
 // middlewares
 app.use(bodyparser({
   enableTypes:['json', 'form', 'text']

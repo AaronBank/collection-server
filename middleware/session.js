@@ -2,25 +2,23 @@
  * @Author: Aaron
  * @Date: 2019-11-06 23:45:18
  * @LastEditors: Aaron
- * @LastEditTime: 2019-11-07 18:38:13
+ * @LastEditTime: 2019-11-19 01:25:03
  * @Description: file content
  */
 const session = require('koa-session')
+const md5Secret = require('../utils/secret').secret
 
 const CONFIG = {
-    key: 'session', /** (string) cookie key (default is koa:sess) */
-    /** (number || 'session') maxAge in ms (default is 1 days) */
-    /** 'session' will result in a cookie that expires when session/browser is closed */
-    /** Warning: If a session cookie is stolen, this cookie will never expire */
-    maxAge: 86400000,
-    autoCommit: true, /** (boolean) automatically commit headers (default true) */
-    overwrite: true, /** (boolean) can overwrite or not (default true) */
-    httpOnly: true, /** (boolean) httpOnly or not (default true) */
-    signed: true, /** (boolean) signed or not (default true) */
-    rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
-    renew: false /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
+    key: 'koa:sess',
+    maxAge: 604800000,
+    overwrite: true, /** (boolean) can overwrite or not (default true)    没有效果，默认 */
+    httpOnly: true, /**  true表示只有服务器端可以获取cookie */
+    signed: true, /** 默认 签名 */
+    rolling: true, /** 在每次请求时强行设置 cookie，这将重置 cookie 过期时间（默认：false） 【需要修改】 */
+    renew: false, /** (boolean) renew session when session is nearly expired      【需要修改】*/
 };
 
 module.exports = app => {
+    app.keys = [md5Secret];
     app.use(session(CONFIG, app))
 }
