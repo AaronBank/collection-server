@@ -2,7 +2,7 @@
  * @Author: Aaron
  * @Date: 2019-11-06 20:28:02
  * @LastEditors: Aaron
- * @LastEditTime: 2019-11-07 00:39:13
+ * @LastEditTime: 2019-11-19 23:12:33
  * @Description: file content
  */
 const Sequelize = require('sequelize');
@@ -26,5 +26,7 @@ const sequelize = new Sequelize({
     },
     timezone: '+08:00'
 });
+
+sequelize.sync()
 
 module.exports = sequelize

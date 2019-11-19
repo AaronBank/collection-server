@@ -2,7 +2,7 @@
  * @Author: Aaron
  * @Date: 2019-11-06 23:21:20
  * @LastEditors: Aaron
- * @LastEditTime: 2019-11-19 01:21:22
+ * @LastEditTime: 2019-11-19 23:04:25
  * @Description: file content
  */
 class Base {
@@ -17,6 +17,10 @@ class Base {
     }
     async find(data) {
         return await this.Model.findAll(data)
+    }
+    async findOne(where) {
+        console.log('where', where, this.Model.findOne)
+        return await this.Model.findOne({ where })
     }
     async findId(id) {
         return await this.Model.findById(id)
